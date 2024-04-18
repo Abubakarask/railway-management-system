@@ -1,0 +1,44 @@
+-- User Table
+CREATE TABLE IF NOT EXISTS Users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('admin', 'user') DEFAULT 'user'
+);
+
+-- Station Table
+CREATE TABLE IF NOT EXISTS Stations (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    public_id VARCHAR(255) NOT NULL UNIQUE,
+    name VARCHAR(255) NOT NULL UNIQUE,
+    state VARCHAR(255) NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Train Table
+CREATE TABLE IF NOT EXISTS Trains (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    publicId VARCHAR(255) NOT NULL UNIQUE,
+    name VARCHAR(255) NOT NULL,
+    source VARCHAR(255) NOT NULL,
+    destination VARCHAR(255) NOT NULL,
+    startsAt DATETIME NOT NULL,
+    endsAt DATETIME NOT NULL,
+    totalSeats INT NOT NULL,
+    availableSeats INT NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (source) REFERENCES Stations(public_id),
+    FOREIGN KEY (destination) REFERENCES Stations(public_id)
+);
+
+-- TrainSeat Table
+CREATE TABLE IF NOT EXISTS TrainSeats (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    seatNumber VARCHAR(255) NOT NULL UNIQUE,
+    trainId INT NOT NULL,
+    bookedByUser INT NOT NULL,
+    FOREIGN KEY (trainId) REFERENCES Trains(id),
+    FOREIGN KEY (bookedByUser) REFERENCES Users(id)
+);
