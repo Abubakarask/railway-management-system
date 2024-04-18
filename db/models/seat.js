@@ -10,11 +10,11 @@ const TrainSeat = sequelize.define("TrainSeat", {
     unique: true,
   },
   trainId: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: false,
     references: {
       model: Train,
-      key: "id",
+      key: "publicId",
     },
   },
   bookedByUser: {
