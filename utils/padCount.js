@@ -1,3 +1,3 @@
-exports.padCount = (count) => {
-  return count.toString().padStart(3, "0");
+exports.padCount = (length, count) => {
+  return count.toString().padStart(length, "0");
 };

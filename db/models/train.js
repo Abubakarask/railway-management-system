@@ -3,24 +3,29 @@ const sequelize = require("../sequelize");
 const Station = require("./station");
 
 const Train = sequelize.define("train", {
+  publicId: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
   name: {
     type: DataTypes.STRING,
     allowNull: false,
   },
   source: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: false,
     references: {
       model: Station,
-      key: "id",
+      key: "publicId",
     },
   },
   destination: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: false,
     references: {
       model: Station,
-      key: "id",
+      key: "publicId",
     },
   },
   startsAt: {

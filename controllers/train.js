@@ -1,6 +1,7 @@
 const User = require("../db/models/user");
 const Station = require("../db/models/station");
 const Train = require("../db/models/train");
+const { padCount } = require("../utils/padCount");
 
 exports.trainCreate = async (req, res) => {
   try {
@@ -68,6 +69,30 @@ exports.trainCreate = async (req, res) => {
       });
     }
 
+    const sourceStationRecord = await Station.findOne({
+      where: { publicId: source },
+    });
+
+    if (!sourceStationRecord) {
+      return res.status(404).json({
+        status: false,
+        message: "Source Station not found, plz add its detail first",
+        code: "NOT_FOUND",
+      });
+    }
+
+    const destStationRecord = await Station.findOne({
+      where: { publicId: destination },
+    });
+
+    if (!destStationRecord) {
+      return res.status(404).json({
+        status: false,
+        message: "Destination Station not found, plz add its detail first",
+        code: "NOT_FOUND",
+      });
+    }
+
     const train = await Train.findOne({
       where: {
         name,
@@ -87,7 +112,19 @@ exports.trainCreate = async (req, res) => {
       });
     }
 
+    const trainCount = await Train.count({
+      where: { source, destination },
+    });
+
+    // Generate the public_id based on state, name, and count
+    const count = padCount(5, trainCount + 1);
+    const sourceCity = source.substring(3, 6).toUpperCase();
+    const destCity = destination.substring(3, 6).toUpperCase();
+
+    const publicId = `${sourceCity}${destCity}${count}`;
+
     const data = await Train.create({
+      publicId,
       name,
       source,
       destination,
@@ -114,9 +151,9 @@ exports.trainCreate = async (req, res) => {
 
 exports.getTrainById = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { publicId } = req.params;
 
-    if (!id) {
+    if (!publicId) {
       return res.status(400).json({
         status: false,
         errors: [
@@ -129,7 +166,7 @@ exports.getTrainById = async (req, res) => {
       });
     }
 
-    const train = await Train.findByPk(id);
+    const train = await Train.findOne({ where: { publicId } });
 
     if (!train) {
       return res.status(404).json({

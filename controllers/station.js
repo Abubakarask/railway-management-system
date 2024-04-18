@@ -59,9 +59,10 @@ exports.stationCreate = async (req, res) => {
     });
 
     // Generate the public_id based on state, name, and count
+    const count = padCount(3, stateStationCount + 1);
     const publicId = `${state.substring(0, 3).toUpperCase()}${name
       .substring(0, 3)
-      .toUpperCase()}${padCount(stateStationCount + 1)}`;
+      .toUpperCase()}${count}`;
 
     const data = await Station.create({
       publicId,

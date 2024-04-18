@@ -33,7 +33,7 @@ router.route("/station/get/:publicId").get(isAuthenticated, getStationById);
 
 // Train APIs
 router.route("/train/create").post(isAuthenticated, trainCreate);
-router.route("/train/get/:id").get(isAuthenticated, getTrainById);
+router.route("/train/get/:publicId").get(isAuthenticated, getTrainById);
 router.route("/train/find").get(isAuthenticated, findTrains);
 
 // Seat APIs
