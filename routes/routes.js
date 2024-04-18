@@ -2,7 +2,7 @@ const express = require("express");
 const { signup, signin, myProfile, signout } = require("../controllers/user");
 const { isAuthenticated } = require("../middlewares/auth");
 const { stationCreate, getStationById } = require("../controllers/station");
-const { trainCreate, getTrainById } = require("../controllers/train");
+const { trainCreate, getTrainById, findTrains } = require("../controllers/train");
 
 const router = new express.Router();
 
@@ -33,5 +33,7 @@ router.route("/station/get/:id").get(isAuthenticated, getStationById);
 // Train APIs
 router.route("/train/create").post(isAuthenticated, trainCreate);
 router.route("/train/get/:id").get(isAuthenticated, getTrainById);
+router.route("/train/find").get(isAuthenticated, findTrains);
+
 
 module.exports = router;

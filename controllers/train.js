@@ -153,3 +153,44 @@ exports.getTrainById = async (req, res) => {
     });
   }
 };
+
+exports.findTrains = async (req, res) => {
+  try {
+    const { source, destination } = req.headers;
+
+    const sourceStation = await Station.findOne({
+      where: { name: source },
+    });
+    const destinationStation = await Station.findOne({
+      where: { name: destination },
+    });
+
+    if (!sourceStation || !destinationStation) {
+      return res.status(404).json({
+        status: false,
+        message: "Invalid source or destination station name",
+        code: "INVALID_DATA",
+      });
+    }
+
+    const trains = await Train.findAll({
+      where: {
+        source: sourceStation.id,
+        destination: destinationStation.id,
+      },
+    });
+
+    res.status(200).json({
+      success: true,
+      content: {
+        data: trains,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
