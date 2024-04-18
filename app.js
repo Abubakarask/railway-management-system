@@ -15,7 +15,7 @@ app.use(cors());
 app.use(cookieParser());
 
 // Using Routes
-app.use("/api/app", router);
+app.use("/api", router);
 app.use("/api/admin", adminRouter);
 
 module.exports = app;

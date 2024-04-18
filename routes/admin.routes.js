@@ -11,7 +11,7 @@ const { isAdminAuthenticated } = require("../middlewares/auth.admin");
 
 const adminRouter = new express.Router();
 
-router.get("/", async (req, res) => {
+adminRouter.get("/", async (req, res) => {
   try {
     return res.status(200).json({
       success: true,
@@ -26,21 +26,21 @@ router.get("/", async (req, res) => {
 });
 
 //User APIs
-router.route("/auth/signup").post(signup);
-router.route("/auth/signin").post(signin);
-router.route("/auth/me").get(isAdminAuthenticated, myProfile);
-router.route("/auth/signout").get(isAdminAuthenticated, signout);
+adminRouter.route("/auth/signup").post(signup);
+adminRouter.route("/auth/signin").post(signin);
+adminRouter.route("/auth/me").get(isAdminAuthenticated, myProfile);
+adminRouter.route("/auth/signout").get(isAdminAuthenticated, signout);
 
 // Station APIs
-router.route("/station/create").post(isAdminAuthenticated, stationCreate);
-router.route("/station/get/:publicId").get(isAdminAuthenticated, getStationById);
+adminRouter.route("/station/create").post(isAdminAuthenticated, stationCreate);
+adminRouter.route("/station/get/:publicId").get(isAdminAuthenticated, getStationById);
 
 // Train APIs
-router.route("/train/create").post(isAdminAuthenticated, trainCreate);
-router.route("/train/get/:publicId").get(isAdminAuthenticated, getTrainById);
-router.route("/train/find").get(isAdminAuthenticated, findTrains);
+adminRouter.route("/train/create").post(isAdminAuthenticated, trainCreate);
+adminRouter.route("/train/get/:publicId").get(isAdminAuthenticated, getTrainById);
+adminRouter.route("/train/find").get(isAdminAuthenticated, findTrains);
 
 // Seat APIs
-router.route("/seat/get/:seatNumber").get(isAdminAuthenticated, getSeatDetails);
+adminRouter.route("/seat/get/:seatNumber").get(isAdminAuthenticated, getSeatDetails);
 
 module.exports = adminRouter;
