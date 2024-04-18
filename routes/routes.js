@@ -29,7 +29,7 @@ router.route("/auth/signout").get(isAuthenticated, signout);
 
 // Station APIs
 router.route("/station/create").post(isAuthenticated, stationCreate);
-router.route("/station/get/:id").get(isAuthenticated, getStationById);
+router.route("/station/get/:publicId").get(isAuthenticated, getStationById);
 
 // Train APIs
 router.route("/train/create").post(isAuthenticated, trainCreate);

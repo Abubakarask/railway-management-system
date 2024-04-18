@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const User = require("../db/models/user");
 const Station = require("../db/models/station");
+const { padCount } = require("../utils/padCount");
 
 exports.stationCreate = async (req, res) => {
   try {
@@ -53,7 +54,17 @@ exports.stationCreate = async (req, res) => {
       });
     }
 
+    const stateStationCount = await Station.count({
+      where: { state },
+    });
+
+    // Generate the public_id based on state, name, and count
+    const publicId = `${state.substring(0, 3).toUpperCase()}${name
+      .substring(0, 3)
+      .toUpperCase()}${padCount(stateStationCount + 1)}`;
+
     const data = await Station.create({
+      publicId,
       name,
       state,
     });
@@ -75,14 +86,14 @@ exports.stationCreate = async (req, res) => {
 
 exports.getStationById = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { publicId } = req.params;
 
-    if (!id) {
+    if (!publicId) {
       return res.status(400).json({
         status: false,
         errors: [
           {
-            param: "id",
+            param: "publicId",
             message: "Please provide a valid station ID",
             code: "INVALID_ID",
           },
@@ -90,7 +101,7 @@ exports.getStationById = async (req, res) => {
       });
     }
 
-    const station = await Station.findByPk(id);
+    const station = await Station.findOne({ where: { publicId } });
 
     if (!station) {
       return res.status(404).json({
