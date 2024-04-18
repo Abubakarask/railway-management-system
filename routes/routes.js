@@ -1,6 +1,8 @@
 const express = require("express");
 const { signup, signin, myProfile, signout } = require("../controllers/user");
 const { isAuthenticated } = require("../middlewares/auth");
+const { stationCreate, getStationById } = require("../controllers/station");
+const { trainCreate, getTrainById } = require("../controllers/train");
 
 const router = new express.Router();
 
@@ -23,5 +25,13 @@ router.route("/auth/signup").post(signup);
 router.route("/auth/signin").post(signin);
 router.route("/auth/me").get(isAuthenticated, myProfile);
 router.route("/auth/signout").get(isAuthenticated, signout);
+
+// Station APIs
+router.route("/station/create").post(isAuthenticated, stationCreate);
+router.route("/station/get/:id").get(isAuthenticated, getStationById);
+
+// Train APIs
+router.route("/train/create").post(isAuthenticated, trainCreate);
+router.route("/train/get/:id").get(isAuthenticated, getTrainById);
 
 module.exports = router;

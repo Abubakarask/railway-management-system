@@ -18,13 +18,13 @@ try {
   console.error("Unable to connect to the database:", error);
 }
 
-// sequelize.sync()
+// sequelize
+//   .sync()
 //   .then(() => {
-//     console.log('Tables created successfully!');
+//     console.log("Tables created successfully!");
 //   })
 //   .catch((error) => {
-//     console.error('Error creating tables:', error);
+//     console.error("Error creating tables:", error);
 //   });
-
 
 module.exports = sequelize;

@@ -3,7 +3,7 @@ const User = require("../db/models/user");
 
 exports.signup = async (req, res) => {
   try {
-    const { name, mobile, email, password } = req.body;
+    const { name, mobile, email, role = "user", password } = req.body;
 
     if (!name || !mobile || !password) {
       return res.status(400).json({
@@ -41,6 +41,7 @@ exports.signup = async (req, res) => {
       name,
       mobile,
       email,
+      role,
       password,
     });
 
