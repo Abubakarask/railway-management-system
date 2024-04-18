@@ -2,6 +2,7 @@ const User = require("../db/models/user");
 const Station = require("../db/models/station");
 const Train = require("../db/models/train");
 const { padCount } = require("../utils/padCount");
+const TrainSeat = require("../db/models/seat");
 
 exports.trainCreate = async (req, res) => {
   try {
@@ -196,10 +197,10 @@ exports.findTrains = async (req, res) => {
     const { source, destination } = req.headers;
 
     const sourceStation = await Station.findOne({
-      where: { name: source },
+      where: { publicId: source },
     });
     const destinationStation = await Station.findOne({
-      where: { name: destination },
+      where: { publicId: destination },
     });
 
     if (!sourceStation || !destinationStation) {
@@ -212,10 +213,34 @@ exports.findTrains = async (req, res) => {
 
     const trains = await Train.findAll({
       where: {
-        source: sourceStation.id,
-        destination: destinationStation.id,
+        source: sourceStation.publicId,
+        destination: destinationStation.publicId,
       },
     });
+
+    for (const train of trains) {
+      const { totalSeats } = train;
+      const bookedSeatRecords = await TrainSeat.findAll({
+        where: { trainId: train.publicId },
+      });
+
+      // Extract booked seat numbers from bookedSeats
+      const bookedSeatNumbers = bookedSeatRecords.map(
+        (seat) => seat.seatNumber
+      );
+
+      // Generate available seat numbers
+      const availableSeats = [];
+      for (let i = 1; i <= totalSeats; i++) {
+        const seatNumber = `AC${train.publicId.substring(0, 6)}${i}`;
+        if (!bookedSeatNumbers.includes(seatNumber)) {
+          availableSeats.push(seatNumber);
+        }
+      }
+
+      // Add availableSeats attribute to the train object
+      train.dataValues.availableSeats = availableSeats;
+    }
 
     res.status(200).json({
       success: true,
