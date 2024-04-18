@@ -3,6 +3,7 @@ const { signup, signin, myProfile, signout } = require("../controllers/user");
 const { isAuthenticated } = require("../middlewares/auth");
 const { stationCreate, getStationById } = require("../controllers/station");
 const { trainCreate, getTrainById, findTrains } = require("../controllers/train");
+const { bookSeat, getSeatDetails } = require("../controllers/seat");
 
 const router = new express.Router();
 
@@ -34,6 +35,12 @@ router.route("/station/get/:id").get(isAuthenticated, getStationById);
 router.route("/train/create").post(isAuthenticated, trainCreate);
 router.route("/train/get/:id").get(isAuthenticated, getTrainById);
 router.route("/train/find").get(isAuthenticated, findTrains);
+
+// Seat APIs
+router.route("/seat/book").post(isAuthenticated, bookSeat);
+router.route("/seat/get/:seatNumber").get(isAuthenticated, getSeatDetails);
+
+
 
 
 module.exports = router;
