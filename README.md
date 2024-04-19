@@ -50,6 +50,8 @@ git clone https://github.com/Abubakarask/anakin-assessment.git
 ### Start the project with `npm run dev`.
 
 # APIs
+You can access Postman and import the postman file to get all APIs and there details like payload endpoints and response structure.
+Here are details of few of the APIs:
 
 ## 1. Register a User
 
