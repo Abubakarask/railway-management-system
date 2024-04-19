@@ -8,7 +8,12 @@ The project implements role-based access control, distinguishing between admin u
 
 # Steps to run the Project
 
-## Step1 --> Get(Retrieve) Files which are not present in zipped folder
+## Step1 --> Clone the repository:
+```bash
+git clone https://github.com/Abubakarask/anakin-assessment.git
+```
+
+## Step2 --> Get(Retrieve) Files which are not present in zipped folder
 
 ### i)node_modules --> Use `npm i` (to install required libraries)
 
@@ -22,7 +27,7 @@ The project implements role-based access control, distinguishing between admin u
 
 ### iii) Add tables in your sql server/workbench
     These are few options to add tables in sql server/workbench:
-     - Option 1: Uncomment Line 21 - 28 from db.sequelize.js to migrate and create tables automatically.
+     - Option 1: Uncomment Line 21 - 28 from db.sequelize.js and start the server to migrate and create tables automatically.
      - Option 2: Paste the SQL query commands from sql_queries.txt file to create tables.
      - Option 3: 
         - Install Sequelize CLI:
@@ -38,6 +43,6 @@ The project implements role-based access control, distinguishing between admin u
 
 ### iv) Export Postman from folder Postman to get all the APIs.
 
-## Step2: Start Project
+## Step3: Start Project
 
 ### Start the project with `npm run dev`.

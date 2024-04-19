@@ -1,0 +1,694 @@
+{
+	"info": {
+		"_postman_id": "0c8c37c3-af44-48ad-833c-c026e244719a",
+		"name": "Anakin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24314504"
+	},
+	"item": [
+		{
+			"name": "ADMIN",
+			"item": [
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "SignUp",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Abubakar\",\r\n    \"email\": \"email\",\r\n    \"mobile\": 9096851451,\r\n    \"role\": \"admin\",\r\n    \"password\": \"password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3600/api/admin/auth/signup",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3600",
+									"path": [
+										"api",
+										"admin",
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SignIN",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"mobile\": 9096851451,\r\n    \"password\": \"password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3600/api/admin/auth/signin",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3600",
+									"path": [
+										"api",
+										"admin",
+										"auth",
+										"signin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "MyProfile",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "api-key",
+										"value": "secret_data_api_key",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3600/api/admin/auth/me",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3600",
+									"path": [
+										"api",
+										"admin",
+										"auth",
+										"me"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SignOut",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "api-key",
+										"value": "secret_data_api_key",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3600/api/admin/auth/signout",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3600",
+									"path": [
+										"api",
+										"admin",
+										"auth",
+										"signout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Train",
+					"item": [
+						{
+							"name": "Create Train",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "api-key",
+										"value": "secret_data_api_key",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Nanded Express\",\r\n    \"source\": \"MAHNAN004\",\r\n    \"destination\": \"MAHPUN002\",\r\n    \"startsAt\": \"2024-04-19\",\r\n    \"endsAt\": \"2024-04-20\",\r\n    \"totalSeats\": 100\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3600/api/admin/train/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3600",
+									"path": [
+										"api",
+										"admin",
+										"train",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Single Train",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "api-key",
+										"value": "secret_data_api_key",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"mobile\": 9096851451,\r\n    \"password\": \"password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3600/api/admin/train/get/NANPUN00001",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3600",
+									"path": [
+										"api",
+										"admin",
+										"train",
+										"get",
+										"NANPUN00001"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "FindTrains",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "source",
+										"value": "Pune",
+										"type": "text"
+									},
+									{
+										"key": "destination",
+										"value": "Mumbai",
+										"type": "text"
+									},
+									{
+										"key": "api-key",
+										"value": "secret_data_api_key",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3600/api/admin/train/find",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3600",
+									"path": [
+										"api",
+										"admin",
+										"train",
+										"find"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Seat",
+					"item": [
+						{
+							"name": "Get Seat/Ticket Details",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "api-key",
+										"value": "secret_data_api_key",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3600/api/admin/seat/get/SC001",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3600",
+									"path": [
+										"api",
+										"admin",
+										"seat",
+										"get",
+										"SC001"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Station",
+					"item": [
+						{
+							"name": "Create Station",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "api-key",
+										"value": "secret_data_api_key",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Amravati\",\r\n    \"state\": \"Maharashtra\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3600/api/admin/station/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3600",
+									"path": [
+										"api",
+										"admin",
+										"station",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Single Station",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "api-key",
+										"value": "secret_data_api_key",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3600/api/admin/station/get/MAHAMR005",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3600",
+									"path": [
+										"api",
+										"admin",
+										"station",
+										"get",
+										"MAHAMR005"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Home Page",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3600/api/admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3600",
+							"path": [
+								"api",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "APP",
+			"item": [
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "SignUp",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Abubakar\",\r\n    \"email\": \"email@\",\r\n    \"mobile\": 9370144677,\r\n    \"role\": \"user\",\r\n    \"password\": \"password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3600/api/auth/signup",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3600",
+									"path": [
+										"api",
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SignIN",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"mobile\": 9096851451,\r\n    \"password\": \"password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3600/api/auth/signin",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3600",
+									"path": [
+										"api",
+										"auth",
+										"signin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "MyProfile",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3600/api/auth/me",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3600",
+									"path": [
+										"api",
+										"auth",
+										"me"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SignOut",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3600/api/auth/signout",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3600",
+									"path": [
+										"api",
+										"auth",
+										"signout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Train",
+					"item": [
+						{
+							"name": "Get Single Train",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"mobile\": 9096851451,\r\n    \"password\": \"password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3600/api/train/get/NANNAG00001",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3600",
+									"path": [
+										"api",
+										"train",
+										"get",
+										"NANNAG00001"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "FindTrains",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "source",
+										"value": "MAHNAN004",
+										"type": "text"
+									},
+									{
+										"key": "destination",
+										"value": "MAHPUN002",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3600/api/train/find",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3600",
+									"path": [
+										"api",
+										"train",
+										"find"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Seat",
+					"item": [
+						{
+							"name": "Book Seat",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"trainPublicId\": \"NANPUN00001\",\r\n    \"seatNumber\": \"ACNANPUN1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3600/api/seat/book",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3600",
+									"path": [
+										"api",
+										"seat",
+										"book"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Seat/Ticket Details",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"mobile\": 9096851451,\r\n    \"password\": \"password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3600/api/seat/get/SC001",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3600",
+									"path": [
+										"api",
+										"seat",
+										"get",
+										"SC001"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Station",
+					"item": [
+						{
+							"name": "Get Single Station",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"mobile\": 9096851451,\r\n    \"password\": \"password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3600/api/station/get/MAHNAN004",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3600",
+									"path": [
+										"api",
+										"station",
+										"get",
+										"MAHNAN004"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Home Page",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3600/api",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3600",
+							"path": [
+								"api"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
