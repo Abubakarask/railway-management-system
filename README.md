@@ -9,6 +9,7 @@ The project implements role-based access control, distinguishing between admin u
 # Steps to run the Project
 
 ## Step1 --> Clone the repository:
+
 ```bash
 git clone https://github.com/Abubakarask/anakin-assessment.git
 ```
@@ -26,10 +27,11 @@ git clone https://github.com/Abubakarask/anakin-assessment.git
                           - ADMIN_AUTH_KEY
 
 ### iii) Add tables in your sql server/workbench
+
     These are few options to add tables in sql server/workbench:
      - Option 1: Uncomment Line 21 - 28 from db.sequelize.js and start the server to migrate and create tables automatically.
      - Option 2: Paste the SQL query commands from sql_queries.txt file to create tables.
-     - Option 3: 
+     - Option 3:
         - Install Sequelize CLI:
             ```npm install --save-dev sequelize-cli```
         - Configure Sequelize:
@@ -46,3 +48,78 @@ git clone https://github.com/Abubakarask/anakin-assessment.git
 ## Step3: Start Project
 
 ### Start the project with `npm run dev`.
+
+# APIs
+
+## 1. Register a User
+
+### Description:
+
+Creates a new user account by accepting user details such as username, email, and password.
+
+### Endpoint:
+
+Admin:
+`POST api/admin/auth/signup`
+
+App:
+`POST api/auth/signup`
+
+## 2. Login User
+
+### Description:
+
+Authenticates a user by validating their credentials (mobile and password). Upon successful login, an authentication token (JWT) is generated and returned in the response.
+
+### Endpoint:
+
+Admin:
+`POST api/admin/auth/signin`
+
+App:
+`POST api/auth/signin`
+
+## 3. Add a Train
+
+### Description:
+
+Allows an admin user to add a new train to the system by providing details such as train name, source, destination, departure time, arrival time, total seats, etc.
+
+### Endpoint:
+
+Admin:
+`POST api/admin/train/create`
+
+## 4. Get Seat Availability
+
+### Description:
+
+Retrieves the availability of seats on trains between two specified stations. Users can provide the source and destination stations(in header), and the API returns a list of trains along with their available seats.
+
+### Endpoint:
+
+Admin:
+`GET api/admin/train/find`
+
+App:
+`GET api/train/find`
+
+## 5. Book Seat
+
+### Description:
+
+Allows a user to book a seat on a specific train. Users must provide the train ID and the seat number they wish to book. Upon successful booking, the available seat count for the train is updated.
+
+### Endpoint:
+
+`POST /api/seat/book`
+
+## 6. Retrieve Seat Details
+
+### Description:
+
+Retrieves the seat details of a particular train by providing the seatNumber.
+
+### Endpoint:
+
+`GET /api/seat/get/:seatNumber`
