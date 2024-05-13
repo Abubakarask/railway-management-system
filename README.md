@@ -1,4 +1,4 @@
-# railway management system
+# Railway Management System
 
 ## Description
 
