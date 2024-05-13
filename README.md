@@ -1,8 +1,8 @@
-# anakin-assessment
+# railway management system
 
 ## Description
 
-Anakin-Assessment is a railway management system API designed to mimic the functionality of IRCTC. The API is built using Node.js with Express.js for the backend, and it utilizes MySQL as the database.
+This project is a railway management system API designed to mimic the functionality of IRCTC. The API is built using Node.js with Express.js for the backend, and it utilizes MySQL as the database.
 
 The project implements role-based access control, distinguishing between admin users with full access and regular login users who can perform limited actions. Authentication is handled using JSON Web Tokens (JWT), and admin API endpoints are protected with an API key to prevent unauthorized access.
 
